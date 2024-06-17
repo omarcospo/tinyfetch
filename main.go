@@ -36,6 +36,7 @@ func main() {
 	get_env("SHELL", "Shell:")
 	get_info("/proc/cpuinfo", "model name\t:", "CPU:")
 	get_memory()
+	get_uptime()
 	get_env("LANG", "Locale:")
 }
 
@@ -54,7 +55,9 @@ func get_env(env string, tag string) {
 		fmt.Println(errMsg)
 		os.Exit(1)
 	}
-	fmt.Println(red+tag+reset, os.Getenv(env))
+	fmt.Println(red+tag+reset, envCmd)
+}
+
 func get_uptime() {
 	var tag string = "Uptime:"
 	file, err := os.ReadFile("/proc/uptime")
