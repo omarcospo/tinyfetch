@@ -14,6 +14,8 @@ package main
 // Battery: /sys/class/power_supply/ (e.g., /sys/class/power_supply/BAT0/ for the first battery).
 // Power Adapter: /sys/class/power_supply/ (e.g., /sys/class/power_supply/AC/ for the AC adapter).
 // Locale: $LANG.
+// Uptime: /proc/uptime
+// Kernel Version: /proc/version
 
 import (
 	"errors"
@@ -53,6 +55,20 @@ func get_env(env string, tag string) {
 		os.Exit(1)
 	}
 	fmt.Println(red+tag+reset, os.Getenv(env))
+func get_uptime() {
+	var tag string = "Uptime:"
+	file, err := os.ReadFile("/proc/uptime")
+	if err != nil {
+		fmt.Println("\n" + red + "---> " + "Uptime:" + "INFO NOT FOUND" + reset)
+		os.Exit(1)
+	}
+	info, _ := strconv.ParseFloat(strings.Split(string(file), " ")[0], 64)
+	if info >= 3600 {
+		fmt.Printf("%s%s%s %.0fh\n", red, tag, reset, info/3600)
+	} else {
+		fmt.Printf("%s%s%s %.2fmin\n", red, tag, reset, info/60)
+	}
+	return
 }
 
 func get_info(path string, prefix string, tag string) {
