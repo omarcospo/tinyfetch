@@ -1,21 +1,22 @@
 package main
 
-// OS: /etc/os-release
-// Host: /etc/hostname
+// DONE:
 // User: $USER
-// Linux Version: /etc/os-release
-// Packages:
 // Shell: $SHELL.
-// CPU: /proc/cpuinfo.
 // Memory: /proc/meminfo.
-// Swap: /proc/swaps
-// Disk: /etc/fstab, /proc/mounts
-// Local IP: /etc/network/interfaces.
-// Battery: /sys/class/power_supply/ (e.g., /sys/class/power_supply/BAT0/ for the first battery).
-// Power Adapter: /sys/class/power_supply/ (e.g., /sys/class/power_supply/AC/ for the AC adapter).
+// CPU: /proc/cpuinfo.
 // Locale: $LANG.
 // Uptime: /proc/uptime
+// OS: /etc/os-release
+// FIXME:
+// TODO:
+// Local IP: /etc/network/interfaces.
+// Swap: /proc/swaps
+// Disk: /etc/fstab, /proc/mounts
 // Kernel Version: /proc/version
+// Battery: /sys/class/power_supply/ (e.g., /sys/class/power_supply/BAT0/ for the first battery).
+// Power Adapter: /sys/class/power_supply/ (e.g., /sys/class/power_supply/AC/ for the AC adapter).
+// Host: /etc/hostname
 
 import (
 	"errors"
