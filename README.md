@@ -1,4 +1,5 @@
-Little project as a introduction to GoLang.
+Little project as a introduction to GoLang that intend to display some informations about your linux system:
+![Example Fetch](/.resources/tinyfetch.png "Example Fetch")
 
 What I'm learning:
 - Importing modules
@@ -8,7 +9,3 @@ What I'm learning:
 - Error handling
 - Reading files
 - Converting strings, ints and floats
-
-The program displays some informations about your linux system:
-
-![Example Fetch](/.resources/initialfetch.png "Example Fetch")
