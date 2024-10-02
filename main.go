@@ -1,3 +1,4 @@
+// main
 package main
 
 // DONE:
@@ -31,7 +32,7 @@ const (
 	red   string = "\033[31m"
 )
 
-func ReadInfoFile(path string, tag string) string {
+func readInfoFile(path string, tag string) string {
 	file, err := os.ReadFile(path)
 	if err != nil {
 		errMsg := errors.New("\n" + red + "---> " + tag + "INFO NOT FOUND" + reset)
@@ -41,7 +42,7 @@ func ReadInfoFile(path string, tag string) string {
 	return string(file)
 }
 
-func CutStrPrefix(content string, prefix string) string {
+func cutStrPrefix(content string, prefix string) string {
 	lines := strings.Split(content, "\n")
 	for _, line := range lines {
 		if strings.HasPrefix(line, prefix) {
@@ -53,13 +54,13 @@ func CutStrPrefix(content string, prefix string) string {
 	return ""
 }
 
-func GetInfo(path string, prefix string, tag string) {
+func getInfo(path string, prefix string, tag string) {
 	file := ReadInfoFile(path, tag)
 	info := CutStrPrefix(file, prefix)
 	fmt.Println(red+tag+reset, info)
 }
 
-func GetEnv(env string, tag string) {
+func getEnv(env string, tag string) {
 	var envCmd string = os.Getenv(env)
 	if envCmd == "" {
 		errMsg := errors.New("\n" + red + "---> " + tag + "INFO NOT FOUND" + reset)
@@ -69,7 +70,7 @@ func GetEnv(env string, tag string) {
 	fmt.Println(red+tag+reset, envCmd)
 }
 
-func GetUptime() {
+func getUptime() {
 	var tag string = "Uptime:"
 	var file = ReadInfoFile("/proc/uptime", tag)
 	info, _ := strconv.ParseFloat(strings.Split(file, " ")[0], 64)
@@ -81,7 +82,7 @@ func GetUptime() {
 	return
 }
 
-func GetMemory() {
+func getMemory() {
 	var tag string = "Memory:"
 	var prefix string = "MemTotal:"
 	var file = ReadInfoFile("/proc/meminfo", tag)
@@ -94,11 +95,12 @@ func GetMemory() {
 }
 
 func main() {
-	GetInfo("/etc/os-release", "NAME=", "Distro:")
-	GetEnv("USER", "User:")
-	GetEnv("SHELL", "Shell:")
-	GetInfo("/proc/cpuinfo", "model name\t:", "CPU:")
-	GetMemory()
-	GetUptime()
-	GetEnv("LANG", "Locale:")
+	getInfo("/etc/os-release", "NAME=", "Distro:")
+	getEnv("USER", "User:")
+	getEnv("SHELL", "Shell:")
+	getInfo("/proc/cpuinfo", "model name\t:", "CPU:")
+	getMemory()
+	getUptime()
+	getEnv("LANG", "Locale:")
+	os.Getenv("TERM")
 }
